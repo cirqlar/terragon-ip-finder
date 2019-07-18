@@ -10,7 +10,13 @@ const readline = require("readline").createInterface({
 
 // Get IP and delegate to ipFinder
 readline.question("Enter an IP Address: ", (ipAddress) => {
-    ipFinder(ipAddress);
+    ipAddress = ipAddress.trim(); //Trim white space
+    const returnValue = ipFinder(ipAddress);
+    if (!returnValue) {
+        console.log(`The IP Address ${ipAddress} is invalid`);
+    } else {
+        console.log(returnValue);
+    }
     process.exit();
 });
 
