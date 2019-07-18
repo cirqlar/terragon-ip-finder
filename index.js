@@ -1,3 +1,5 @@
+// Import IP finder
+const ipFinder = require("./ip_finder");
 // Import readline for getting input from the command line
 const readline = require("readline").createInterface({
     input: process.stdin,
@@ -6,9 +8,9 @@ const readline = require("readline").createInterface({
 
 
 
-// Get IP and return it to the user
+// Get IP and delegate to ipFinder
 readline.question("Enter an IP Address: ", (ipAddress) => {
-    console.log(`Your IP Address was ${ipAddress}`);
+    ipFinder(ipAddress);
     process.exit();
 });
 
