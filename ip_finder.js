@@ -67,19 +67,14 @@ function queryIPStack(ipAddress) {
 async function findIP(ipAddress) {
     // Validate IP address
     if (!validateIPv4Address(ipAddress) && !validateIPv6Address(ipAddress)) {
-        return false;
+        throw new Error(`The IP Address ${ipAddress} is invalid`);
     }
 
     console.log(`Your ipAddress was ${ipAddress}`);
 
     // Get data from ipstack
-    try {
-        let data = await queryIPStack(ipAddress);
-        return data;
-    } catch (error) {
-        console.log("An error occured", error)
-        return false
-    }
+    let data = await queryIPStack(ipAddress);
+    return data;
 }
 
 module.exports = findIP;
