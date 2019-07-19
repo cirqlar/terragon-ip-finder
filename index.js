@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 if (!process.env.API_KEY) {
     console.log("Please set your API key");
+    process.exit();
 }
 
 app.get("/:ipAddress", (req, res) => {
