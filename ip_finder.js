@@ -1,7 +1,7 @@
 // Require http for making API calls
 const http = require('http');
 // Require API key
-const API_KEY = require('./API');
+const API_KEY = process.env.API_KEY;
 // Obtained from https://www.regextester.com/95309
 const IPv4Regex = /^(?:(?:^|\.)(?:2(?:5[0-5]|[0-4]\d)|1?\d?\d)){4}$/;
 // Obtained from https://www.regextester.com/104037
