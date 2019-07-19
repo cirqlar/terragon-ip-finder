@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/cirqlar/terragon-ip-finder#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "async-redis": "^1.1.7",
+    "express": "^4.17.1",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "dotenv": "^8.0.0"

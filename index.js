@@ -1,35 +1,24 @@
 // Import IP finder
-const ipFinder = require("./ip_finder");
-// Import readline for getting input from the command line
-const readline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout,
+const ipFinder = require("./ip/ip_finder");
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get("/:ipAddress", (req, res) => {
+    ipFinder(req.params.ipAddress)
+        .then( (returnValue) => {
+                res.status(200).json(returnValue);
+            }
+        )
+        .catch( (error) => {
+                let resObj = {};
+                resObj.status = (error.status == 400) ? error.status : 500;
+                resObj.message = (error.status == 400) ? error.message : "Internal Server Error";
+                res.status(resObj.status).json(resObj);
+            }
+        );
 });
 
-
-
-// Get IP and delegate to ipFinder
-function question() {
-    readline.question("Enter an IP Address: ", (ipAddress) => {
-        ipAddress = ipAddress.trim(); //Trim white space
-        ipFinder(ipAddress)
-            .then( (returnValue) => {
-                    console.log(returnValue);
-                    question();
-                }
-            )
-            .catch( (error) => {
-                    console.log('An error occurred:', error.message);
-                    question();
-                }
-            );
-    });
-}
-
-question();
-
-process.on('SIGINT', () => {
-    readline.close();
-    console.log("Exiting...\n");
-    process.exit();
+app.listen(PORT, () => {
+    console.log("Server started?");
 });
