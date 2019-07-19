@@ -1,7 +1,7 @@
 const Redis = require("async-redis");
 const client = Redis.createClient();
 const PREPEND = "IPKEY_";
-const LIFETIME = process.env.LIFETIME || 60;
+const LIFETIME = process.env.LIFETIME || 300;
 
 /**
  * Check if data is stored in cache and return

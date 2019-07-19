@@ -4,6 +4,10 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+if (!process.env.API_KEY) {
+    console.log("Please set your API key");
+}
+
 app.get("/:ipAddress", (req, res) => {
     ipFinder(req.params.ipAddress)
         .then( (returnValue) => {
