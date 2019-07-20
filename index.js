@@ -1,18 +1,19 @@
-// Import IP finder
 const ipFinder = require("./ip/ip_finder");
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Exit if API key is not set
 if (!process.env.API_KEY) {
     console.log("Please set your API key");
     process.exit();
 }
 
+// Route for get endpoint
 app.get("/:ipAddress", (req, res) => {
     ipFinder(req.params.ipAddress)
-        .then( (returnValue) => {
-                res.status(200).json(returnValue);
+        .then( (data) => {
+                res.status(200).json(data);
             }
         )
         .catch( (error) => {
@@ -24,6 +25,7 @@ app.get("/:ipAddress", (req, res) => {
         );
 });
 
+// Start server
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });

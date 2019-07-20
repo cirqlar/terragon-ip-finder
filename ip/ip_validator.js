@@ -27,8 +27,4 @@ function validateIPAddress(ipAddress) {
     return validateIPv4Address(ipAddress) || validateIPv6Address(ipAddress);
 }
 
-module.exports = {
-    validateIPAddress,
-    validateIPv4Address,
-    validateIPv6Address,
-};
+module.exports = validateIPAddress;

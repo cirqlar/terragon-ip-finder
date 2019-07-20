@@ -1,5 +1,5 @@
 // Require IP validation module
-const validator = require('./ip_validator').validateIPAddress;
+const validator = require('./ip_validator');
 // Require cache manager
 const cache = require('../cache/IPcache');
 // Require ipstack module
@@ -38,12 +38,10 @@ async function findIP(ipAddress) {
      * return data
      */
     return await cache.getIP(ipAddress)
-        .catch( (ipAddress) => {
-            return queryIPStack(ipAddress)
-                .then(transformData)
-                .then((data) => {
-                    return cache.setIP(ipAddress, data);
-                });
+        .catch( async (ipAddress) => {
+            const data = await queryIPStack(ipAddress);
+            const data = await transformData(data);
+            return cache.setIP(ipAddress, data);
         });
 }
 
