@@ -39,8 +39,8 @@ async function findIP(ipAddress) {
      */
     return await cache.getIP(ipAddress)
         .catch( async (ipAddress) => {
-            const data = await queryIPStack(ipAddress);
-            const data = await transformData(data);
+            let data = await queryIPStack(ipAddress);
+            data = await transformData(data);
             return cache.setIP(ipAddress, data);
         });
 }
