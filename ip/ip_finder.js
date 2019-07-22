@@ -5,19 +5,18 @@ const cache = require('../cache/IPcache');
 // Require ipstack module
 const queryIPStack = require('./ipstack');
 
-
 /**
  * Recieves the data object and sets the properties accordingly
  */
 function transformData(data) {
-    return {
-        ip: data.ip,
-        continent: data.continent_name,
-        country: data.country_name,
-        state: data.region_name,
-        latitude: data.latitude,
-        longitude: data.longitude,
-    };
+  return {
+    ip: data.ip,
+    continent: data.continent_name,
+    country: data.country_name,
+    state: data.region_name,
+    latitude: data.latitude,
+    longitude: data.longitude
+  };
 }
 
 /**
@@ -25,24 +24,23 @@ function transformData(data) {
  * Return Sample return value
  */
 async function findIP(ipAddress) {
-    // Validate IP address
-    if (!validator(ipAddress)) {
-        const error = new Error(`The IP Address ${ipAddress} is invalid`);
-        error.status = 400;
-        throw error;
-    }
+  // Validate IP address
+  if (!validator(ipAddress)) {
+    const error = new Error(`The IP Address ${ipAddress} is invalid`);
+    error.status = 400;
+    throw error;
+  }
 
-    /**
-     * Get IP from cache
-     * If not, query ipstack, save data to cache
-     * return data
-     */
-    return await cache.getIP(ipAddress)
-        .catch( async (ipAddress) => {
-            let data = await queryIPStack(ipAddress);
-            data = await transformData(data);
-            return cache.setIP(ipAddress, data);
-        });
+  /**
+   * Get IP from cache
+   * If not, query ipstack, save data to cache
+   * return data
+   */
+  return await cache.getIP(ipAddress).catch(async ipAddress => {
+    let data = await queryIPStack(ipAddress);
+    data = await transformData(data);
+    return cache.setIP(ipAddress, data);
+  });
 }
 
 module.exports = findIP;

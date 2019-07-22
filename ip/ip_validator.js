@@ -7,16 +7,16 @@ const IPv6Regex = /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:)
  * Return true if ipAddress is a valid IPv4 address
  * Return false otherwise
  */
-function validateIPv4Address (ipAddress) {
-    return IPv4Regex.test(ipAddress);
+function validateIPv4Address(ipAddress) {
+  return IPv4Regex.test(ipAddress);
 }
 
 /**
  * Return true if ipAddress is a valid IPv6 address
  * Return false otherwise
  */
-function validateIPv6Address (ipAddress) {
-    return IPv6Regex.test(ipAddress);
+function validateIPv6Address(ipAddress) {
+  return IPv6Regex.test(ipAddress);
 }
 
 /**
@@ -24,7 +24,7 @@ function validateIPv6Address (ipAddress) {
  * Return false otherwise
  */
 function validateIPAddress(ipAddress) {
-    return validateIPv4Address(ipAddress) || validateIPv6Address(ipAddress);
+  return validateIPv4Address(ipAddress) || validateIPv6Address(ipAddress);
 }
 
 module.exports = validateIPAddress;
