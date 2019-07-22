@@ -15,7 +15,7 @@ function transformData(data) {
     country: data.country_name,
     state: data.region_name,
     latitude: data.latitude,
-    longitude: data.longitude
+    longitude: data.longitude,
   };
 }
 

@@ -27,5 +27,5 @@ async function setIP(ipAddress, data) {
 
 module.exports = {
   getIP,
-  setIP
+  setIP,
 };
